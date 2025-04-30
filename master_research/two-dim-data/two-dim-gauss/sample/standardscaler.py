@@ -1,12 +1,16 @@
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 
-# 例：2次元正規分布データ（50個）
-data = np.random.multivariate_normal([5, 5], [[1, 0.3], [0.3, 1]], size=50)
+original_mean = [5, 5]  # 元の平均
+original_cov = [[1, 0.3], [0.3, 1]]  # 元の分散共分散行列
 
-# データの平均・分散を確認
+# 例：2次元正規分布データ（50個）
+data = np.random.multivariate_normal(original_mean, original_cov, size=50)
+
+
+# データの平均・分散共分散行列を確認
 print("元の平均:", data.mean(axis=0))     # → [5, 5]
-print("元の標準偏差:", data.std(axis=0))  # → [1, 1]
+print("元の分散共分散行列:", np.cov(data.T)) # → [[1, 0.3], [0.3, 1]]
 
 # スケーラーを生成・適合（fit）し、変換（transform）
 scaler = StandardScaler()
